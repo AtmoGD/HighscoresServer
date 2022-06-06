@@ -8,6 +8,8 @@ var Oasis;
 (function (Oasis) {
     let port = process.env.PORT == undefined ? 5001 : process.env.PORT;
     let databaseURL = "mongodb+srv://Admin:OasisServer@cluster0.ayk2n.mongodb.net/Oasis?retryWrites=true&w=majority";
+    let databaseName = "Oasis";
+    let collectionName = "Users";
     let mongoClient = new Mongo.MongoClient(databaseURL);
     startServer(port);
     connectToDatabase(databaseURL);
@@ -27,20 +29,58 @@ var Oasis;
         if (_request.url) {
             console.log(_request.url);
             let url = Url.parse(_request.url, true);
-            let mongo = mongoClient.db("Oasis").collection("Commands");
+            let mongo = mongoClient.db(databaseName).collection(collectionName);
             let id = url.query["id"]?.toString();
-            let object = url.query["object"]?.toString();
-            let command = url.query["command"]?.toString();
-            if (command != undefined && object != undefined && id != undefined) {
-                if (command == "get") {
-                    let result = await mongo.findOne({ _id: id });
-                    if (result != null)
-                        _response.write(result[object].toString());
+            let command = url.query["action"]?.toString();
+            let name = url.query["name"]?.toString();
+            let score = url.query["score"]?.toString();
+            if (command != undefined && id != undefined) {
+                switch (command) {
+                    case "get":
+                        _response.write("Get user with id: " + id);
+                        let result = await mongo.findOne({ _id: id });
+                        if (result != null) {
+                            _response.write(JSON.stringify(result));
+                        }
+                        break;
+                    case "update":
+                        _response.write("Set user with id: " + id);
+                        if (name != undefined && score != undefined) {
+                            await mongo.updateOne({ _id: id }, { $set: { name: name, score: parseInt(score) } });
+                            _response.write("Update successful");
+                        }
+                        else {
+                            _response.write("Update failed");
+                        }
+                        break;
+                    case "delete":
+                        _response.write("Delete user with id: " + id);
+                        await mongo.deleteOne({ _id: id });
+                        _response.write("Delete successful");
+                        break;
+                    case "create":
+                        _response.write("Create new user");
+                        if (name != undefined && score != undefined) {
+                            await mongo.insertOne({ id: id, name: name, score: parseInt(score) });
+                            _response.write("Insert successful");
+                        }
+                        else {
+                            _response.write("Insert failed");
+                        }
+                        break;
                 }
-                else {
-                    await mongo.updateOne({ _id: id }, { $set: { [object]: command } }, { upsert: true });
-                    _response.write("ID: " + id + "\nChanged value of Object: " + object + "\nto: " + command);
-                }
+                // if (command == "get") {
+                //     let result: Mongo.WithId<Mongo.Document> | null = await mongo.findOne({ _id: id });
+                //     if (result != null)
+                //         _response.write(result.toString());
+                // } else {
+                //     await mongo.updateOne(
+                //         { _id: id },
+                //         // { $set: { [object]: command } },
+                //         { upsert: true }
+                //     );
+                // _response.write("ID: " + id + "\nChanged value of Object: " + object + "\nto: " + command);
+                // }
             }
         }
         _response.end();
