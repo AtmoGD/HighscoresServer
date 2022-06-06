@@ -41,30 +41,13 @@ var HighscoreServer;
                         const cursor = mongo.find({ game: game }).sort({ score: -1 }).limit(parseInt(amount ? amount : "10"));
                         let result = await cursor.toArray();
                         _response.write("{");
-                        // result.forEach(element => {
-                        //     _response.write("{ name: " + element.name + ", score: " + element.score + "}");
-                        //     // _response.write(element.name + ": " + element.score + "<br>");
-                        //     // _response.write("<br>");
-                        // });
-                        // _response.write("}")
                         for (let i = 0; i < result.length; i++) {
-                            // _response.write("<br>");
-                            // _response.write(result[i].name + ": " + result[i].score + "<br>");
                             _response.write("{ name: " + result[i].name + ", score: " + result[i].score + "}");
                             if (i < result.length - 1) {
                                 _response.write(",");
                             }
                         }
-                        // result.forEach(element => {
-                        //     _response.write("{ name: " + element.name + ", score: " + element.score + "}");
-                        //     // _response.write(element.name + ": " + element.score + "<br>");
-                        //     // _response.write("<br>");
-                        // });
                         _response.write("}");
-                        // result.forEach(element => {
-                        //     _response.write(element);
-                        // });
-                        // _response.write(JSON.parse(result.toString()));
                         break;
                     case "create":
                         _response.write("Create new user");
