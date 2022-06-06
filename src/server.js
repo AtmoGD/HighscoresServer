@@ -51,6 +51,9 @@ var HighscoreServer;
                         //   await cursor.forEach(console.dir);
                         const cursor = mongo.find({ game: game }).sort({ score: -1 }).limit(10);
                         let result = await cursor.toArray();
+                        result.forEach(element => {
+                            _response.write(element.name + ": " + element.score + "<br>");
+                        });
                         // if ((await cursor.count()) === 0) {
                         //     console.warn("No documents found!");
                         // }
