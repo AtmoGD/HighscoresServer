@@ -41,15 +41,15 @@ var Oasis;
                         let result = await mongo.find().sort({ score: -1 }).limit(1);
                         _response.write("Get user with id: " + id);
                         // let result: Mongo.WithId<Mongo.Document> | null = await mongo.findOne({ _id: id });
-                        // if (result != null) {
-                        //     // let resultString: string = result.toString();
-                        //     let resultString: string = result.toString();
-                        //     _response.write(resultString);
-                        //     _response.write("<br>");
-                        //     _response.write(result);
-                        //     _response.write(result);
-                        //     // _response.write("score: " + result["score"] + " name: " + result["name"] + " game: " + result["game"]);
-                        // }
+                        if (result != null) {
+                            //     // let resultString: string = result.toString();
+                            let resultString = result.toString();
+                            _response.write(resultString);
+                            //     _response.write("<br>");
+                            //     _response.write(result);
+                            //     _response.write(result);
+                            //     // _response.write("score: " + result["score"] + " name: " + result["name"] + " game: " + result["game"]);
+                        }
                         break;
                     case "update":
                         _response.write("Set user with id: " + id);
