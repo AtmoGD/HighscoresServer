@@ -32,6 +32,7 @@ var Oasis;
             let mongo = mongoClient.db(databaseName).collection(collectionName);
             let id = url.query["id"]?.toString();
             let command = url.query["command"]?.toString();
+            let game = url.query["game"]?.toString();
             let name = url.query["name"]?.toString();
             let score = url.query["score"]?.toString();
             if (command != undefined && id != undefined) {
@@ -46,7 +47,7 @@ var Oasis;
                     case "update":
                         _response.write("Set user with id: " + id);
                         if (name != undefined && score != undefined) {
-                            await mongo.updateOne({ _id: id }, { $set: { name: name, score: parseInt(score) } }, { upsert: true });
+                            await mongo.updateOne({ _id: id }, { $set: { game: game, name: name, score: parseInt(score) } }, { upsert: true });
                             _response.write("Update successful");
                         }
                         else {
@@ -61,7 +62,7 @@ var Oasis;
                     case "create":
                         _response.write("Create new user");
                         if (name != undefined && score != undefined) {
-                            await mongo.insertOne({ id: id, name: name, score: parseInt(score) });
+                            await mongo.insertOne({ game: game, name: name, score: parseInt(score) });
                             _response.write("Insert successful");
                         }
                         else {

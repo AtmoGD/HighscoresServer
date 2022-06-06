@@ -39,6 +39,7 @@ export namespace Oasis {
 
             let id: string | undefined = url.query["id"]?.toString();
             let command: string | undefined = url.query["command"]?.toString();
+            let game: string | undefined = url.query["game"]?.toString();
             let name: string | undefined = url.query["name"]?.toString();
             let score: string | undefined = url.query["score"]?.toString();
 
@@ -57,7 +58,7 @@ export namespace Oasis {
                         if (name != undefined && score != undefined) {
                             await mongo.updateOne(
                                 { _id: id }, 
-                                { $set: { name: name, score: parseInt(score) } }, 
+                                { $set: { game:game, name: name, score: parseInt(score) } }, 
                                 { upsert: true }
                                 );
                             _response.write("Update successful");
@@ -75,7 +76,7 @@ export namespace Oasis {
                     case "create":
                         _response.write("Create new user");
                         if (name != undefined && score != undefined) {
-                            await mongo.insertOne({ id: id, name: name, score: parseInt(score) });
+                            await mongo.insertOne({ game: game, name: name, score: parseInt(score) });
                             _response.write("Insert successful");
                         } else {
                             _response.write("Insert failed");
