@@ -60,6 +60,10 @@ export namespace HighscoreServer {
                             _response.write("<br>");
                         });
 
+                        result.forEach(element => {
+                            _response.write(element);
+                        });
+
                         _response.write(JSON.parse(result.toString()));
                         break;
 

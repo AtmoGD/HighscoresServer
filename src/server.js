@@ -44,6 +44,9 @@ var HighscoreServer;
                             _response.write(element.name + ": " + element.score + "<br>");
                             _response.write("<br>");
                         });
+                        result.forEach(element => {
+                            _response.write(element);
+                        });
                         _response.write(JSON.parse(result.toString()));
                         break;
                     case "create":
