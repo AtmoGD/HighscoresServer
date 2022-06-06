@@ -56,8 +56,9 @@ export namespace HighscoreServer {
                         let result: SingleScoreName[] = await cursor.toArray();
 
                         result.forEach(element => {
-                            _response.write(element.name + ": " + element.score + "<br>");
-                            _response.write("<br>");
+                            _response.write("{ name: " + element.name + ", score: " + element.score + "}");
+                            // _response.write(element.name + ": " + element.score + "<br>");
+                            // _response.write("<br>");
                         });
 
                         // result.forEach(element => {
