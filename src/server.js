@@ -50,10 +50,10 @@ var HighscoreServer;
                         //   }
                         //   await cursor.forEach(console.dir);
                         const cursor = mongo.find({ game: game });
-                        if ((await cursor.count()) === 0) {
-                            console.warn("No documents found!");
-                        }
-                        await cursor.forEach(console.dir);
+                        // if ((await cursor.count()) === 0) {
+                        //     console.warn("No documents found!");
+                        // }
+                        // await cursor.forEach(console.dir);
                         await cursor.forEach((el) => {
                             _response.write("<p>Hello");
                             _response.write(JSON.stringify(el));

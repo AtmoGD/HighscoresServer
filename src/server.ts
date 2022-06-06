@@ -65,14 +65,14 @@ export namespace HighscoreServer {
                         //   await cursor.forEach(console.dir);
 
                         const cursor = mongo.find<SingleScoreName>({ game: game });
-                          if ((await cursor.count()) === 0) {
-                            console.warn("No documents found!");
-                          }
-                          await cursor.forEach(console.dir);
-                          await cursor.forEach((el)=> {
-                              _response.write("<p>Hello");
-                                _response.write(JSON.stringify(el));
-                          });
+                        // if ((await cursor.count()) === 0) {
+                        //     console.warn("No documents found!");
+                        // }
+                        // await cursor.forEach(console.dir);
+                        await cursor.forEach((el)=> {
+                            _response.write("<p>Hello");
+                            _response.write(JSON.stringify(el));
+                        });
 
 
                         // let result = await mongo.find().sort({score:-1}).limit(1)
