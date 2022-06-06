@@ -53,8 +53,8 @@ export namespace Oasis {
                         //     // let resultString: string = result.toString();
                             let resultString: string = result.toString();
                             _response.write(resultString);
-                        //     _response.write("<br>");
-                        //     _response.write(result);
+                            _response.write("<br>");
+                            _response.write(result);
                         //     _response.write(result);
                         //     // _response.write("score: " + result["score"] + " name: " + result["name"] + " game: " + result["game"]);
                         }
