@@ -54,6 +54,10 @@ var HighscoreServer;
                             console.warn("No documents found!");
                         }
                         await cursor.forEach(console.dir);
+                        await cursor.forEach((el) => {
+                            _response.write("<p>");
+                            _response.write(JSON.stringify(el));
+                        });
                         // let result = await mongo.find().sort({score:-1}).limit(1)
                         // let result = await mongo.find();
                         _response.write("Get user with id: " + id);
