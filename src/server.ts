@@ -60,7 +60,7 @@ export namespace HighscoreServer {
                             _response.write("<br>");
                         });
 
-                        _response.write(result);
+                        _response.write(JSON.parse(result.toString()));
                         break;
 
                     case "create":

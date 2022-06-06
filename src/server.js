@@ -44,7 +44,7 @@ var HighscoreServer;
                             _response.write(element.name + ": " + element.score + "<br>");
                             _response.write("<br>");
                         });
-                        _response.write(result);
+                        _response.write(JSON.parse(result.toString()));
                         break;
                     case "create":
                         _response.write("Create new user");
