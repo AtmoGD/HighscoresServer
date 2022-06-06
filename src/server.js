@@ -35,6 +35,7 @@ var HighscoreServer;
             let id = url.query["id"]?.toString();
             let name = url.query["name"]?.toString();
             let score = url.query["score"]?.toString();
+            let amount = url.query["amount"]?.toString();
             if (command != undefined && id != undefined) {
                 switch (command) {
                     case "get":
@@ -49,7 +50,8 @@ var HighscoreServer;
                         //     console.warn("No documents found!");
                         //   }
                         //   await cursor.forEach(console.dir);
-                        const cursor = mongo.find({ game: game }).sort({ score: -1 }).limit(10);
+                        let amountNumber = Number(amount);
+                        const cursor = mongo.find({ game: game }).sort({ score: -1 }).limit(amountNumber);
                         let result = await cursor.toArray();
                         result.forEach(element => {
                             _response.write(element.name + ": " + element.score + "<br>");
@@ -58,14 +60,14 @@ var HighscoreServer;
                         //     console.warn("No documents found!");
                         // }
                         // await cursor.forEach(console.dir);
-                        _response.write(JSON.stringify(result));
-                        await cursor.forEach((el) => {
-                            _response.write("<p>Hello");
-                            _response.write(JSON.stringify(el));
-                        });
+                        // _response.write(JSON.stringify(result));
+                        // await cursor.forEach((el)=> {
+                        //     _response.write("<p>Hello");
+                        //     _response.write(JSON.stringify(el));
+                        // });
                         // let result = await mongo.find().sort({score:-1}).limit(1)
                         // let result = await mongo.find();
-                        _response.write("Get user with id: " + id);
+                        // _response.write("Get user with id: " + id);
                         // // let result: Mongo.WithId<Mongo.Document> | null = await mongo.findOne({ _id: id });
                         // if (result != null) {
                         //     //     // let resultString: string = result.toString();
