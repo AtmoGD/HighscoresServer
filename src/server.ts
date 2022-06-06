@@ -60,11 +60,11 @@ export namespace HighscoreServer {
                             _response.write("<br>");
                         });
 
-                        result.forEach(element => {
-                            _response.write(element);
-                        });
+                        // result.forEach(element => {
+                        //     _response.write(element);
+                        // });
 
-                        _response.write(JSON.parse(result.toString()));
+                        // _response.write(JSON.parse(result.toString()));
                         break;
 
                     case "create":
