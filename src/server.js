@@ -42,7 +42,7 @@ var Oasis;
                         _response.write("Get user with id: " + id);
                         // let result: Mongo.WithId<Mongo.Document> | null = await mongo.findOne({ _id: id });
                         if (result != null) {
-                            _response.write(JSON.stringify(result));
+                            _response.write("score: " + result["score"] + " name: " + result["name"] + " game: " + result["game"]);
                         }
                         break;
                     case "update":
