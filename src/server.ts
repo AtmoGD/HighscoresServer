@@ -50,7 +50,7 @@ export namespace Oasis {
                         _response.write("Get user with id: " + id);
                         // let result: Mongo.WithId<Mongo.Document> | null = await mongo.findOne({ _id: id });
                         if (result != null) {
-                            let resultString: string = JSON.stringify(result);
+                            let resultString: string = result.toString();
                             _response.write(resultString);
                             // _response.write("score: " + result["score"] + " name: " + result["name"] + " game: " + result["game"]);
                         }
