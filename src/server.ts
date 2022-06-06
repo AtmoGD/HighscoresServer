@@ -65,10 +65,12 @@ export namespace HighscoreServer {
                         //   await cursor.forEach(console.dir);
 
                         const cursor = mongo.find<SingleScoreName>({ game: game }).sort({ score: -1 }).limit(10);
+                        let result: SingleScoreName[] = await cursor.toArray();
                         // if ((await cursor.count()) === 0) {
                         //     console.warn("No documents found!");
                         // }
                         // await cursor.forEach(console.dir);
+                        _response.write(JSON.stringify(result));
                         await cursor.forEach((el)=> {
                             _response.write("<p>Hello");
                             _response.write(JSON.stringify(el));
