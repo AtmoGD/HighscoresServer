@@ -49,7 +49,7 @@ var HighscoreServer;
                         //     console.warn("No documents found!");
                         //   }
                         //   await cursor.forEach(console.dir);
-                        const cursor = mongo.find({ game: game });
+                        const cursor = mongo.find({ game: game }).sort({ score: -1 }).limit(10);
                         // if ((await cursor.count()) === 0) {
                         //     console.warn("No documents found!");
                         // }

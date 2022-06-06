@@ -64,7 +64,7 @@ export namespace HighscoreServer {
                         //   }
                         //   await cursor.forEach(console.dir);
 
-                        const cursor = mongo.find<SingleScoreName>({ game: game });
+                        const cursor = mongo.find<SingleScoreName>({ game: game }).sort({ score: -1 }).limit(10);
                         // if ((await cursor.count()) === 0) {
                         //     console.warn("No documents found!");
                         // }
