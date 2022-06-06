@@ -37,17 +37,18 @@ export namespace Oasis {
 
             let mongo: Mongo.Collection = mongoClient.db(databaseName).collection(collectionName);
 
-            let id: string | undefined = url.query["id"]?.toString();
-            let command: string | undefined = url.query["command"]?.toString();
             let game: string | undefined = url.query["game"]?.toString();
+            let command: string | undefined = url.query["command"]?.toString();
+            let id: string | undefined = url.query["id"]?.toString();
             let name: string | undefined = url.query["name"]?.toString();
             let score: string | undefined = url.query["score"]?.toString();
 
             if (command != undefined && id != undefined) {
                 switch (command) {
                     case "get":
+                        let result: Mongo.Document = mongo.find().sort({score:-1}).limit(1)
                         _response.write("Get user with id: " + id);
-                        let result: Mongo.WithId<Mongo.Document> | null = await mongo.findOne({ _id: id });
+                        // let result: Mongo.WithId<Mongo.Document> | null = await mongo.findOne({ _id: id });
                         if (result != null) {
                             _response.write(JSON.stringify(result));
                         }
