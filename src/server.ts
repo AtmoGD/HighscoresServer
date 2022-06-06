@@ -45,12 +45,11 @@ export namespace HighscoreServer {
 
             let game: string | undefined = url.query["game"]?.toString();
             let command: string | undefined = url.query["command"]?.toString();
-            let id: string | undefined = url.query["id"]?.toString();
             let name: string | undefined = url.query["name"]?.toString();
             let score: string | undefined = url.query["score"]?.toString();
             let amount: string | undefined = url.query["amount"]?.toString();
 
-            if (command != undefined && id != undefined) {
+            if (command != undefined) {
                 switch (command) {
                     case "get":
                         const cursor = mongo.find<SingleScoreName>({ game: game }).sort({ score: -1 }).limit(parseInt(amount ? amount : "10"));
@@ -58,27 +57,10 @@ export namespace HighscoreServer {
 
                         result.forEach(element => {
                             _response.write(element.name + ": " + element.score + "<br>");
+                            _response.write("<br>");
                         });
-                        break;
 
-                    case "update":
-                        _response.write("Set user with id: " + id);
-                        if (name != undefined && score != undefined) {
-                            await mongo.updateOne(
-                                { _id: id },
-                                { $set: { game: game, name: name, score: parseInt(score) } },
-                                { upsert: true }
-                            );
-                            _response.write("Update successful");
-                        } else {
-                            _response.write("Update failed");
-                        }
-                        break;
-
-                    case "delete":
-                        _response.write("Delete user with id: " + id);
-                        await mongo.deleteOne({ _id: id });
-                        _response.write("Delete successful");
+                        _response.write(result);
                         break;
 
                     case "create":
