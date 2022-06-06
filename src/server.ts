@@ -53,51 +53,14 @@ export namespace HighscoreServer {
             if (command != undefined && id != undefined) {
                 switch (command) {
                     case "get":
-                        // const cursor = mongo.find<SingleScoreName>(
-                        //     { runtime: { $lt: 15 } },
-                        //     {
-                        //       sort: { title: 1 },
-                        //       projection: { _id: 0, title: 1, imdb: 1 },
-                        //     }
-                        //   );
-                        //   if ((await cursor.count()) === 0) {
-                        //     console.warn("No documents found!");
-                        //   }
-                        //   await cursor.forEach(console.dir);
+                        // let amountNumber: number = Number(amount);
 
-                        let amountNumber: number = Number(amount);
-
-                        const cursor = mongo.find<SingleScoreName>({ game: game }).sort({ score: -1 }).limit(amountNumber);
+                        const cursor = mongo.find<SingleScoreName>({ game: game }).sort({ score: -1 }).limit(parseInt(amount ? amount : "10"));
                         let result: SingleScoreName[] = await cursor.toArray();
 
                         result.forEach(element => {
                             _response.write(element.name + ": " + element.score + "<br>");
                         });
-
-                        // if ((await cursor.count()) === 0) {
-                        //     console.warn("No documents found!");
-                        // }
-                        // await cursor.forEach(console.dir);
-                        // _response.write(JSON.stringify(result));
-                        // await cursor.forEach((el)=> {
-                        //     _response.write("<p>Hello");
-                        //     _response.write(JSON.stringify(el));
-                        // });
-
-
-                        // let result = await mongo.find().sort({score:-1}).limit(1)
-                        // let result = await mongo.find();
-                        // _response.write("Get user with id: " + id);
-                        // // let result: Mongo.WithId<Mongo.Document> | null = await mongo.findOne({ _id: id });
-                        // if (result != null) {
-                        //     //     // let resultString: string = result.toString();
-                        //     let resultString: string = JSON.stringify(result);
-                        //     _response.write(resultString);
-                        //     // _response.write("<br>");
-                        //     // _response.write(result);
-                        //     //     _response.write(result);
-                        //     //     // _response.write("score: " + result["score"] + " name: " + result["name"] + " game: " + result["game"]);
-                        // }
                         break;
 
                     case "update":
