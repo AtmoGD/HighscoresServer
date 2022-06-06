@@ -7,9 +7,9 @@ const Mongo = require("mongodb");
 var Oasis;
 (function (Oasis) {
     let port = process.env.PORT == undefined ? 5001 : process.env.PORT;
-    let databaseURL = "mongodb+srv://Admin:OasisServer@cluster0.ayk2n.mongodb.net/Oasis?retryWrites=true&w=majority";
-    let databaseName = "Oasis";
-    let collectionName = "Users";
+    let databaseURL = "mongodb+srv://admin:<l4mOCsrXCosic7tx>@highscores.808ei.mongodb.net/?retryWrites=true&w=majority";
+    let databaseName = "HighscoreDatabase";
+    let collectionName = "SingleScoreName";
     let mongoClient = new Mongo.MongoClient(databaseURL);
     startServer(port);
     connectToDatabase(databaseURL);

@@ -4,9 +4,9 @@ import * as Mongo from "mongodb";
 
 export namespace Oasis {
     let port: number | string = process.env.PORT == undefined ? 5001 : process.env.PORT;
-    let databaseURL: string = "mongodb+srv://Admin:OasisServer@cluster0.ayk2n.mongodb.net/Oasis?retryWrites=true&w=majority";
-    let databaseName: string = "Oasis";
-    let collectionName: string = "Users";
+    let databaseURL: string = "mongodb+srv://admin:<l4mOCsrXCosic7tx>@highscores.808ei.mongodb.net/?retryWrites=true&w=majority";
+    let databaseName: string = "HighscoreDatabase";
+    let collectionName: string = "SingleScoreName";
     let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(databaseURL);
 
     startServer(port);
