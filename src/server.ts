@@ -55,7 +55,11 @@ export namespace Oasis {
                     case "update":
                         _response.write("Set user with id: " + id);
                         if (name != undefined && score != undefined) {
-                            await mongo.updateOne({ _id: id }, { $set: { name: name, score: parseInt(score) } });
+                            await mongo.updateOne(
+                                { _id: id }, 
+                                { $set: { name: name, score: parseInt(score) } }, 
+                                { upsert: true }
+                                );
                             _response.write("Update successful");
                         } else {
                             _response.write("Update failed");
