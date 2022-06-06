@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@types/mongodb": "^4.0.7",
+    "@types/node": "^17.0.23",
+    "http": "^0.0.1-security",
+    "mongodb": "^4.5.0",
+    "typescript": "^4.6.3",
+    "url": "^0.11.0"
+  }
+}
