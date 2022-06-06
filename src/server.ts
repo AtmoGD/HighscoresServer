@@ -70,7 +70,7 @@ export namespace HighscoreServer {
                           }
                           await cursor.forEach(console.dir);
                           await cursor.forEach((el)=> {
-                              _response.write("<p>");
+                              _response.write("<p>Hello");
                                 _response.write(JSON.stringify(el));
                           });
 
