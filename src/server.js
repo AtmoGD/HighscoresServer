@@ -43,10 +43,10 @@ var Oasis;
                         // let result: Mongo.WithId<Mongo.Document> | null = await mongo.findOne({ _id: id });
                         if (result != null) {
                             //     // let resultString: string = result.toString();
-                            let resultString = result.toString();
+                            let resultString = JSON.stringify(result);
                             _response.write(resultString);
-                            _response.write("<br>");
-                            _response.write(result);
+                            // _response.write("<br>");
+                            // _response.write(result);
                             //     _response.write(result);
                             //     // _response.write("score: " + result["score"] + " name: " + result["name"] + " game: " + result["game"]);
                         }
