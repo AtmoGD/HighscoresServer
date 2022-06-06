@@ -31,7 +31,7 @@ var Oasis;
             let url = Url.parse(_request.url, true);
             let mongo = mongoClient.db(databaseName).collection(collectionName);
             let id = url.query["id"]?.toString();
-            let command = url.query["action"]?.toString();
+            let command = url.query["command"]?.toString();
             let name = url.query["name"]?.toString();
             let score = url.query["score"]?.toString();
             if (command != undefined && id != undefined) {

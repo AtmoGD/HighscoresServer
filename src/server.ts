@@ -38,11 +38,11 @@ export namespace Oasis {
             let mongo: Mongo.Collection = mongoClient.db(databaseName).collection(collectionName);
 
             let id: string | undefined = url.query["id"]?.toString();
-            let command: string | undefined = url.query["action"]?.toString();
+            let command: string | undefined = url.query["command"]?.toString();
             let name: string | undefined = url.query["name"]?.toString();
             let score: string | undefined = url.query["score"]?.toString();
 
-            if (command != undefined  && id != undefined) {
+            if (command != undefined && id != undefined) {
                 switch (command) {
                     case "get":
                         _response.write("Get user with id: " + id);
@@ -89,7 +89,7 @@ export namespace Oasis {
                 //         // { $set: { [object]: command } },
                 //         { upsert: true }
                 //     );
-                    // _response.write("ID: " + id + "\nChanged value of Object: " + object + "\nto: " + command);
+                // _response.write("ID: " + id + "\nChanged value of Object: " + object + "\nto: " + command);
                 // }
             }
         }
