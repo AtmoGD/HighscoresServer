@@ -55,14 +55,19 @@ export namespace HighscoreServer {
                         const cursor = mongo.find<SingleScoreName>({ game: game }).sort({ score: -1 }).limit(parseInt(amount ? amount : "10"));
                         let result: SingleScoreName[] = await cursor.toArray();
 
-                        _response.write("{")
-                        for (let i = 0; i < result.length; i++) {
-                            _response.write("{ name: " + result[i].name + ", score: " + result[i].score + "}");
-                            if (i < result.length - 1) {
-                                _response.write(",");
-                            }
-                        }
-                        _response.write("}")
+                        // _response.write("{")
+                        // for (let i = 0; i < result.length; i++) {
+                        //     _response.write("{ name: " + result[i].name + ", score: " + result[i].score + "}");
+                        //     if (i < result.length - 1) {
+                        //         _response.write(",");
+                        //     }
+                        // }
+                        // _response.write("}")
+
+                        result.forEach(element => {
+                            _response.write(element.name + "&" + element.score + "&");
+                        });
+                        
                         break;
 
                     case "create":
